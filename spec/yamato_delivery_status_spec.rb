@@ -13,3 +13,10 @@ describe ShipmentStatus, '問い合わせ番号ごとに現在の配送状況を
   end
 end
 
+describe ShipmentStatusAPI, 'キャリアへ問い合わせて配送状況を得る' do
+  before do
+    @api = ShipmentStatusAPI.new
+    @test_code = "10000000000" + (10000000000 % 7).to_s
+  end
+  it { @api.ask([@test_code]).should == {'1000-0000-0004' => '伝票番号未登録'} }
+end

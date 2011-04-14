@@ -24,9 +24,12 @@ end
 class YamatoDeliveryStatus
   class Unreachable < Exception; end
   def search(codes)
-    code = codes.shift
-    raise Unreachable if code == '3'
-    code == '1' ? 'OK' : 'NOT FOUND'
+    raise Unreachable if codes[0] == :timeout
+    return @status[codes.shift] if @status
+  end
+
+  def initialize(status)
+    @status = status if status
   end
 end
 

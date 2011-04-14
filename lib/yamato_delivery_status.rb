@@ -24,7 +24,7 @@ end
 class YamatoDeliveryStatus
   class Unreachable < Exception; end
   def search(codes)
-    raise Unreachable if codes[0] == :timeout
+    raise Unreachable if codes.include? :timeout
     return @status[codes.shift] if @status
   end
 

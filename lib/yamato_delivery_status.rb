@@ -21,6 +21,15 @@ module Enumerable
   end
 end
 
+class YamatoDeliveryStatus
+  class Unreachable < Exception; end
+  def search(codes)
+    code = codes.shift
+    raise Unreachable if code == '3'
+    code == '1' ? 'OK' : 'NOT FOUND'
+  end
+end
+
 ask_delivery_status = lambda do |bill_numbers|
   raise('too many bill numbers') unless bill_numbers.size <= 10
   parameterize = proc {|numbers| numbers.inject_with_index({}) {|r, n, i| r["number#{'%02d' % (i+1)}".to_sym] = n; r} }

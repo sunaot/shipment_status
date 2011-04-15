@@ -70,7 +70,7 @@ module ShippingCarrier
       codes.group_by.with_index {|n, i| i % parts }
     end
   
-    def initialize(status)
+    def initialize(status = nil)
       @status = status || ShipmentStatusAPI.new
     end
   end
